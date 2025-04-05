@@ -1,15 +1,12 @@
-import { useState } from 'react'
+import { Component } from "react";
 
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1>Welcome to newsmorph</h1>
-    </>
-  )
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <p>hello</p>
+      </div>
+    );
+  }
 }
-
-export default App
+export default App;
