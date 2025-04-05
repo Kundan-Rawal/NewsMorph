@@ -17,7 +17,7 @@ const Navbar = () => {
             <ul type="none" className="OptionsonNavbar">
               <Link className="LinkEffectremove">
                 <button className="optionbuttoncontainer">
-                  <li className="optionText">Home</li>
+                  <li>Home</li>
                 </button>
               </Link>
               <Link className="LinkEffectremove">

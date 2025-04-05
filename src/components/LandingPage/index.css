@@ -1,3 +1,79 @@
+:root {
+    --primary-red: #C20202;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #afafaf;
+    --accent: #FF053F;
+  }
+
+
 .LandingPage{
     min-height: 100vh;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Landingpagemaincontainer{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.MainTagline{
+    color: var(--primary-red);
+    margin-top: 30px;
+    font-size: 5vw;
+    font-weight: 700;
+    text-align: center;
+    margin: 10px;
+}
+.TitleDescr{
+    color: var(--gray);
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    width:50vw;
+}
+.cursorforbutton{
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+}
+.Featurstagline{
+    color: var(--white);
+    margin-top: 30px;
+    font-size: 30px;
+    font-weight: 500;
+
+}
+.rowalignerul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.copyrighttextlast{
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+.copyrightlogospan{
+    color: var(--primary-red);
+}
+.logofullinspan{
+    font-weight: 700;
+}
+@media only screen and (max-width: 650px) {
+    .MainTagline{
+        font-size: 50px;
+    }
+    .TitleDescr{
+        font-size:15px;
+        width: 70vw;
+    }
 }
