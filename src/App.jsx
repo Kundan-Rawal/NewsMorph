@@ -1,11 +1,29 @@
 import { Component } from "react";
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import StateContext from "./context/StateContext";
+import "./App.css";
 
 class App extends Component {
+  state = { dropdown: false };
+
+  onClickDropdown = () => {
+    this.setState((prev) => ({ dropdown: !prev.dropdown }));
+  };
+
   render() {
+    const { dropdown } = this.state;
     return (
-      <div>
-        <p>hello</p>
-      </div>
+      <StateContext.Provider
+        value={{
+          dropdown,
+          onClickDropdown: this.onClickDropdown,
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+        </Routes>
+      </StateContext.Provider>
     );
   }
 }
