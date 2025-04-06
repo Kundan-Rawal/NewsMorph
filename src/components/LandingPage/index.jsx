@@ -1,6 +1,7 @@
 import "./index.css";
 import FeaturesLandingCard from "../FeaturesLandingCard";
 import Navbar from "../Navbar";
+import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const LandingPage = (props) => {
@@ -20,7 +21,7 @@ const LandingPage = (props) => {
     },
   ];
   const onClickGetStarted = () => {
-    props.history.push("/login");
+    <Navigate to="/login" />;
   };
 
   return (

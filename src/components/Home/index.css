@@ -1,0 +1,223 @@
+:root {
+    --primary-red: #C20202;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #afafaf;
+    --accent: #FF053F;
+  }
+.mainHomeContainer{
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    background-color: black;
+}
+.leftSideBar{
+    width: 20vw;
+    background-color:rgb(10, 10, 10);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+.profilecontainer{
+    width: 80%;
+    min-height: 10vh;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-width:1px ;
+    border-bottom-style: solid;
+    border-bottom-color: #FF053F;
+    padding-bottom: 20px;
+}
+.mainprofilelogo{
+    font-size: 90px;
+}
+.userproftext{
+    font-size: 20px;
+    color: #C20202;
+    margin-bottom: 20px;
+}
+.emailtext{
+    color: #ffffff;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 500;
+}
+.editprofilebutton{
+    background-color:transparent;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center ;
+    color: #C20202;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.editlogo{
+    font-size: 25px;
+    margin-left: 10px;
+}
+.emailmaintexttext{
+    font-size: 12px;
+    margin-top: 5px;
+}
+.rightsideMainContainer{
+    width: 80vw;
+    padding: 0px 30px;
+}
+.topProfilePage{
+    width: 100%;
+    height: 30vh;
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(194,2,2,1) 250%);
+
+    /* background-color: var(--primary-red); */
+}
+.searchandcountrycontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.searchnewsBar{
+    width:90%;
+    background-color: rgb(10, 10, 10);
+    border: none;
+    height: 35px;
+    outline: none;
+    border-radius: 10px;
+
+    color: #afafaf;
+    padding-left: 30px;
+}
+.inputmaincontainer{
+    border: solid;
+    border-width: 1px;
+    border-color: #afafaf;
+    width: 70%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+.searchiconinbar{
+    font-size: 30px;
+    color:var(--white);
+    margin-right: 10px;
+}
+.searchnewsBar:active .inputmaincontainer{
+    border-color: var(--accent);
+}
+
+
+
+
+
+
+
+
+
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+   
+    font-family: Arial, sans-serif;
+    margin-top: 30px;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .custom-select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-color:var(--primary-red);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .optionincoutrysel{
+    background-color: #000000;
+    color: #fff;
+    border-width:0px ;
+    padding: 20px 10px;
+  }
+  .optionincoutrysel:active{
+    background-color: var(--primary-red);
+  }
+
+
+
+  .CategoryContainer{
+    width: 80%;
+    
+  }
+  .Categeorytext{
+    color: var(--primary-red);
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 20px;
+  }
+  .ulnewscatcontianer{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .optionulactivetrue{
+    min-width:100px ;
+    background-color: var(--primary-red);
+    color: #fff;
+    border-radius: 10px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    margin-top: 30px;
+    transition: 0.4s;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0px 10px;
+
+
+}
+.optionulactivetrue:hover{
+    background-color: #7a0000;
+}
+
+.optionulactivefalse{
+    min-width:100px ;
+    background-color: var(--white);
+    color: #000000;
+    border-radius: 10px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: 0.4s;
+    font-weight: 500;
+    padding: 0px 10px;
+
+
+}
+.optionulactivefalse:hover{
+    background-color: #868686;
+}
