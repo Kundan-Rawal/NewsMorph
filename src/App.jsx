@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
+import LoginPage from "./components/LoginPage";
 import StateContext from "./context/StateContext";
 import "./App.css";
 
@@ -22,6 +23,7 @@ class App extends Component {
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </StateContext.Provider>
     );
