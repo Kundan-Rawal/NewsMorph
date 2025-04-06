@@ -134,3 +134,18 @@
 .buttongooglelogin:hover{
     border-color: #7e0000;
 }
+@media only screen and (max-width: 450px) {
+    .mainloginformcontainer{
+        width: 300px;
+    }
+    .buttongooglelogin{
+        width: 85%;
+    }
+    .inputfieldcontainer{
+        width: 90%;
+    }
+    .Loginbuttonmain{
+        width: 85%;
+    }
+   
+}
