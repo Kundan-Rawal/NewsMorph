@@ -81,7 +81,7 @@ class Home extends Component {
       : "";
     const pageParam = nextPage ? `&page=${nextPage}` : "";
 
-    const API_KEY = "pub_78938dce27bbaf084e7f46bc5e60a9026d77a";
+    const API_KEY = "pub_7893874894b7380c7d7e3720acfbd1a413138";
     const URL = `https://newsdata.io/api/1/news?apikey=${API_KEY}&country=${country}&language=en${categoryParam}${searchParam}${pageParam}`;
 
     this.setState({ isLoading: true });
@@ -180,7 +180,16 @@ class Home extends Component {
                 value={SearchItem}
                 onChange={this.onChangeSearchNews}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") this.getNewsData();
+                  if (e.key === "Enter") {
+                    this.setState(
+                      {
+                        newsList: [],
+                        activecat: "all",
+                        nextPage: null,
+                      },
+                      this.getNewsData
+                    );
+                  }
                 }}
               />
               <FaSearch className="searchiconinbar" />
