@@ -1,0 +1,176 @@
+:root {
+    --primary-red: #C20202;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #afafaf;
+    --accent: #FF053F;
+  }
+.ChannelSuggestionsContainertrue{
+    background-color: #121212;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    display: none;
+    
+}
+.ChannelSuggestionsContainerfalse{
+    background-color: #121212;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    
+}
+.mainHeading{
+    width: 100%;
+    background-color:var(--primary-red) ;
+    color: #fff;
+    height: 15%;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.ReadHead{
+    font-size: 20px;
+    font-weight: 600;
+}
+.logoimagetop{
+    height:35px;
+    width: 35px;
+    border-radius: 40px;
+    margin-left: 20px;
+   
+    transition: 0.3s;
+}
+.topeachcontainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: solid 1px var(--primary-red);
+    width: 80%;
+    padding-bottom: 15px;
+    padding-top:15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.toppara{
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 30px;
+}
+.ulcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+.topeachcontainer:hover .toppara{
+    color: var(--primary-red);
+}
+.topeachcontainer:hover .logoimagetop{
+height: 45px;
+width: 45px;
+}
+.topeachcontainer:hover {
+    width:90%;
+}
+
+@media only screen and (max-width: 1035px) {
+    .ReadHead{font-size: 14px;}
+    .toppara{font-size: 12px;}
+    .topeachcontainer{width: 95%;}
+}
+@media only screen and (max-width: 800px) {
+    .ChannelSuggestionsContainerfalse{
+        display: none;
+    }
+    .ChannelSuggestionsContainertrue{
+        display: block;
+    }
+    .ChannelSuggestionsContainertrue{
+        width: auto;
+        margin-top: 10px;
+        height: auto;
+    }
+    .ChannelSuggestionsContainerfalse{
+        width: 100%;
+        margin-top: 10px;
+        height: auto;
+
+    }
+    .ReadHead{font-size: 20px;}
+    .ulcontainer{
+        flex-direction: row;
+        padding: 0px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .mainHeading{
+        padding: 20px;
+    }
+    .topeachcontainer{
+        border: 1px solid var(--accent);
+        width: 120px;
+        margin-left: 10px;
+    }
+    .logoimagetop{
+        margin-left: 5px;
+    }
+    .toppara{
+        margin-left: 10px;
+    }
+    .topeachcontainer:hover {
+        width:150px;
+    }
+    .ulcontainer{
+        padding-top:10px ;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .ChannelSuggestionsContainertrue{
+        margin-top: 10px;
+        width:auto;
+        height: auto;
+
+    }
+    .topeachcontainer{
+        
+        margin-left:0px;
+        width: 150px;
+        
+
+    }
+    .logoimagetop{
+        height: 20px;
+        width: 20px;
+    }
+    .toppara{margin-left: 2px;}
+    .ulcontainer{
+        width: 100%;
+        padding-top: 20px;
+        
+    }
+    .topeachcontainer:hover {
+        width:150px;
+        background-color: #FF053F;
+    }
+    .topeachcontainer:hover .logoimagetop{
+        height: 20px;
+        width: 20px;
+        }
+    .topeachcontainer:hover .toppara{
+            color: var(--white);
+        }
+        .mainHeading{
+            padding:20px 0px;
+        }
+        .ChannelSuggestionsContainerfalse{
+            width: auto;
+            margin-top: 10px;
+            height: auto;
+    
+        }
+}
