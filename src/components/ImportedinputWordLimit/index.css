@@ -1,0 +1,95 @@
+:root {
+    --primary-red: #C20202;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #afafaf;
+    --accent: #FF053F;
+  }
+.wordsinputcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #c20202, #ff0597);
+    padding: 3px;
+    width: 300px;
+    height: 55px;
+    border-radius: 10px;
+
+    
+}
+.anothercontainer{
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.maininpyuttoadd{
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    border-radius: 10px;
+    margin-left: 10px;
+    outline: none;
+}
+.maininpyuttoadd::-webkit-inner-spin-button,
+.maininpyuttoadd::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  
+}
+.mainshadowonfocus {
+    position: relative;
+    width: 300px;
+    height: 57px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* input bg or container bg */
+    border-radius: 8px;
+    z-index: 1;
+  }
+  
+  .mainshadowonfocus::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: radial-gradient(circle at center, #FF053F, #C20202);
+    filter: blur(5px);
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    border-radius: 8px;
+  }
+  .mainshadowonfocus:hover::after{
+    background: radial-gradient(circle at center, #FF053F, #C20202);
+    filter: blur(20px);
+    opacity: 0.7;
+  }
+  .ailogo{
+        filter: drop-shadow(0px 0px 30px rgb(240, 9, 178));
+        font-weight: 600;
+        margin-left: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #fff;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 90%;
+        
+
+    }  
+
+.ailogo:hover{
+    
+    width: 50%;
+}

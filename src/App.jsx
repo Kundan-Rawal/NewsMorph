@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 import StateContext from "./context/StateContext";
 import { auth, provider, signInWithPopup } from "./firebase";
 import "./App.css";
+import NewsDetailPage from "./components/NewsDetailPage";
 
 class App extends Component {
   state = { dropdown: false, isLoggedIn: false, user: null };
@@ -47,6 +48,7 @@ class App extends Component {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/news/:id" element={<NewsDetailPage />} />
         </Routes>
       </StateContext.Provider>
     );

@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import StateContext from "../../context/StateContext";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { requiredclass } = props;
   return (
     <StateContext.Consumer>
       {(value) => {
         const { dropdown, onClickDropdown } = value;
 
         return (
-          <div className="NavbarContainer">
+          <div className={`NavbarContainer ${requiredclass}`}>
             <h1 className="logomain">
               News<span className="logospan">Morph</span>
             </h1>
