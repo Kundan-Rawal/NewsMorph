@@ -24,7 +24,7 @@ class NewsDetailPage extends Component {
       pubDate: "2025-04-10 10:19:00",
       pubDateTZ: "UTC",
       source_icon: "https://i.bytvi.com/domain_icons/abplive.jpg",
-      source_id: "abplive",
+      source_id: "bbc",
       source_name: "Abp News",
       source_priority: 7754,
       source_url: "http://abplive.com",
@@ -137,7 +137,7 @@ class NewsDetailPage extends Component {
             </div>
           </div>
           <NewsDetailSecondaryContainer
-            source_name={objectrequired.source_name}
+            source_name={objectrequired.source_id}
           />
         </div>
       </div>

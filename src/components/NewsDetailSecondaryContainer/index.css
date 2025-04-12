@@ -7,21 +7,101 @@
   }
 .NewsDetailSecondaryContainer{
     background-color: rgb(0, 0, 0);
-    width: 20vw;
+    width: 25vw;
     
-    height: 100%;
     display:flex;
     flex-direction: column;
     justify-content: center;
+    
+    top:0;
 }
 .MoreFromSourceContainer{
-    background-color: #1c1c1c;
-    width: 95%;
-    height: 500px;
+    background-color: #1a1a1a;
+    width: 24vw;
+    min-height: 500px;
     position :sticky;
-    top:0;
+    position: absolute;
+    top:10vh;
+    border-radius: 10px;
 
 }
 .headingformoresourcecont{
-    background-color:C20202 ;
+    background-color:#C20202;
+    width: 100%;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 5px 0px;
 }
+
+.news-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .news-card {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: #1a1a1a;
+  }
+  .news-card img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+
+
+  .news-card {
+    
+    padding: 1rem;
+  }
+  
+  .news-img {
+    width: 300px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .carousel-controls {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .titleofrelatednews{
+    font-size: 20px;
+    color: #C20202;
+    font-weight: 600;
+    display: -webkit-box;
+  -webkit-line-clamp: 2;    /* 👈 Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+  .paragraphforrelatednews{
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    display: -webkit-box;
+  -webkit-line-clamp: 4;    /* 👈 Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 15px;
+  }
+  .arraowbutton{
+    background-color: #FF053F;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .postindicator{
+    color:var(--accent);
+    font-weight: 500;
+    font-size: 20px;
+  }

@@ -16,7 +16,7 @@
 }
 .NewsDetailMainContainer{
     background-color: rgb(9, 9, 9);
-    width: 80vw;
+    width: 75vw;
     height: 90vh;
     padding: 20px 30px;
    
@@ -213,7 +213,11 @@
       #C20202,
       #FF053F,
       #ff3b93,
-      #ffaad5
+      #ffaad5,
+      #ffaad5,
+      #ff3b93,
+      #FF053F,
+      #C20202
     );
     background-size: 300% 300%;
     color: transparent;
@@ -228,7 +232,7 @@
       background-position: 0% 50%;
     }
     50% {
-      background-position: 100% 50%;
+      background-position: 200% 100%;
     }
     100% {
       background-position: 0% 50%;
