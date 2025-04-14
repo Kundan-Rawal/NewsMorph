@@ -3,7 +3,7 @@ import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { IoLogOut } from "react-icons/io5";
 import { TailSpin } from "react-loader-spinner";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { Component } from "react";
 import SideBarNewsChannelContainer from "../SideBarNewsChannelContainer";
@@ -25,6 +25,13 @@ const category = [
   { id: "tourism", dispText: "Tourism" },
   { id: "world", dispText: "World" },
 ];
+
+function withNavigation(Component) {
+  return function WrappedComponent(props) {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
 
 class Home extends Component {
   constructor(props) {
@@ -131,7 +138,7 @@ class Home extends Component {
         console.warn("❌ API Error:", data.message);
         if (api < 3) {
           this.setState((prev) => ({ isLoading: false, api: prev.api + 1 }));
-        } else if ((api = 3)) {
+        } else if (api === 3) {
           this.setState({ isLoading: false, api: 0 });
         } else {
           this.setState({ isLoading: false });
@@ -327,11 +334,19 @@ class Home extends Component {
                                 </p>
                               </div>
                             </div>
-                            <Link to="/home">
-                              <button className="readmorebutton">
-                                Read more
-                              </button>
-                            </Link>
+                            <button
+                              className="readmorebutton"
+                              onClick={() =>
+                                this.props.navigate(
+                                  `/news/${item.article_id}`,
+                                  {
+                                    state: { newsData: item },
+                                  }
+                                )
+                              }
+                            >
+                              Read more
+                            </button>
                           </div>
                         </li>
                       );
@@ -352,5 +367,4 @@ class Home extends Component {
     );
   }
 }
-
-export default Home;
+export default withNavigation(Home);

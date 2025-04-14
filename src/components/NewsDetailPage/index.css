@@ -17,17 +17,17 @@
 .NewsDetailMainContainer{
     background-color: rgb(9, 9, 9);
     width: 75vw;
-    height: 90vh;
-    padding: 20px 30px;
+    min-height: 90vh;
+    
    
 
 }
 .allLegendaryNewsdetcontainer{
     width: 100vw;
     height:100vh ;
-    overflow-y: scroll;
-    scrollbar-width: none;
     background-color: #000000;
+    overflow-x: scroll;
+    scrollbar-width: none;
 }
 .newsHeadline{
     background-color: var(--primary-red);
@@ -38,7 +38,8 @@
     color: #ffffff;
     width: 200px;
     transform: skew(-25deg);
-    margin-left: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
     border-radius: 5px;
 
 }
@@ -109,7 +110,17 @@
     font-size: 20px;
     font-weight: 400;
     text-align:left;
+    margin-left: 20px;
+    
+  
 
+}
+
+.parafornewsdet::marker{
+  color: var(--accent);
+  font-size: 1.5em;
+  margin: 0px;
+  padding: 0px;
 }
 .AIfeaturesContainer{
     width: 100%;
@@ -163,10 +174,12 @@
 
     position: relative;
   }
-  .buttonforaifeat:active{
+  .buttonforaifeattrue{
     background: linear-gradient(90deg, #C20202, #f441a5);
     background-color: none;
   }
+
+  
   
   .container-aifeatures {
     position: relative;
@@ -206,7 +219,7 @@
 
 
   .gradient-breathing-text {
-    font-size: 36px;
+    font-size: 25px;
     font-weight: bold;
     background: linear-gradient(
       -45deg,
@@ -238,3 +251,24 @@
       background-position: 0% 50%;
     }
   }
+
+
+  .allMythicNewsDetContainer{
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+.Footerforwebsite{
+  background-color: #2e2e2e;
+  width: 100vw;
+  height: 20vh;
+  border-top: 2px solid var(--accent);
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.copyrightnotice{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+}

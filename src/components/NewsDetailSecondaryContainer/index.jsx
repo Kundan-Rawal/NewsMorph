@@ -33,28 +33,27 @@ class NewsDetailSecondaryContainer extends Component {
 
     try {
       const response = await fetch(URL);
-      const data = await response.json();
 
-      if (data.status === "error") {
-        console.warn("❌ API Error: Changing Active api", data.message);
+      if (response.status === 429) {
+        console.warn("🔁 Rate limit hit. Switching API key...");
         if (api < API_KEY_ARRAY.length - 1) {
-          this.setState((prev) => ({ isLoading: false, api: prev.api + 1 }));
+          this.setState((prev) => ({ api: prev.api + 1 }), this.getdatasource);
         } else {
-          this.setState({ isLoading: false, api: 0 });
+          this.setState({ api: 0 }, this.getdatasource);
         }
         return;
       }
 
+      const data = await response.json();
       if (Array.isArray(data.results)) {
-        console.log(data.results);
         this.setState({
           newsListnew: data.results,
           nextPage: data.nextPage || null,
           isLoading: false,
         });
       } else {
-        console.warn("⚠️ Unexpected or empty response.");
-        this.setState({ isLoading: false, nextPage: null });
+        console.warn("⚠️ Unexpected response format.");
+        this.setState({ isLoading: false });
       }
     } catch (err) {
       console.error("🔥 Fetch error:", err);

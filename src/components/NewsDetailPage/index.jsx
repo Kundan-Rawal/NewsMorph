@@ -3,48 +3,134 @@ import { Component } from "react";
 import Navbar from "../Navbar";
 import NewsDetailSecondaryContainer from "../NewsDetailSecondaryContainer";
 import { formatDistanceToNow } from "date-fns";
+import { useLocation, useParams } from "react-router-dom";
 import PyramidLoader from "../PyramidLoader";
 import InputWord from "../ImportedinputWordLimit";
+import {
+  getExtendedContent,
+  getCompressedContent,
+  getDefaultExtendedContent,
+} from "../../GeminiFolders/geminiAPI";
+import { LiaEthernetSolid } from "react-icons/lia";
+
+function withRouter(Component) {
+  return function WrappedComponent(props) {
+    const location = useLocation();
+    const params = useParams();
+    return <Component {...props} location={location} params={params} />;
+  };
+}
 
 class NewsDetailPage extends Component {
-  render() {
-    const objectrequired = {
-      article_id: "2401c4e578ca1a26726b452fa788f06c",
-      category: ["top"],
-      country: ["india"],
-      creator: ["ABP Live News"],
-      description:
-        "To ensure a smoother and more comfortable travel experience for passengers during the summer holiday rush, Indian Railways has announced a series of special trains. These special trains are scheduled to run from April 21 to July 12, targeting heavily crowded routes and popular destinations.In view of the crowd, the Railway will run three special trains. Special trains including Delhi-Varanasi will run from 21 April to 12 July. There will be 35 trips of weekly and triweekly trains, officials confirmed.Among the highlighted services is the Delhi-Varanasi (04024/23) Special Train, which will commence on April 21 and continue operations until July 11. This weekly train will run 35 trips in total, departing from Delhi at 10:30 PM and from Varanasi at 5:17 AM. The train will make a key stoppage at Moradabad after Ghaziabad. Another addition is the Bhatinda-Varanasi (04518/17) Special Train, which will operate on a biweekly schedule during the same period—April 21 to July 12—with a total of 35 trips. This train will halt at Moradabad and Bareilly, arriving at Moradabad at 5:40 AM and departing from Varanasi at 8:00 AM.Also included in the lineup is the Lucknow-Chandigarh (04209/10) Special Train, which will run three times a week. It will operate from April 21 to July 10, departing from Lucknow on Monday, Wednesday, and Friday, and from Chandigarh on Tuesday, Thursday, and Saturday. The Lucknow departure is scheduled for 8:45 PM, reaching Moradabad at 2:15 AM, while the return train will arrive in Moradabad at 3:25 PM.These three services are part of a broader effort. “Railways has run 29 special trains so far” to manage peak travel demands during the summer, particularly during the Vaishnodevi Yatra and holiday travel towards Bihar.The other special trains include services between Varanasi to Shri Mata Vaishnodevi, Varanasi-Chandigarh, Anand Vihar-Muzaffarpur, Anand Vihar-Barauni, Lucknow-New Delhi, Rajgir-Haridwar, and Rajgir to Shaheed Captain Tushar Mahajan Udhampur. According to Senior DCM, there will be six and twelve trips of special trains. These trains will also run till July.",
-      duplicate: false,
-      image_url:
-        "https://feeds.abplive.com/onecms/images/uploaded-images/2025/03/07/e9306d2f1877b67a378abcf83b94c5e41741321493321645_original.jpg",
-      keywords: ["news"],
-      language: "english",
-      link: "https://news.abplive.com/news/summer-special-trains-3-new-trains-to-run-from-april-21-check-dates-routes-timings-stoppages-1764334",
-      pubDate: "2025-04-10 10:19:00",
-      pubDateTZ: "UTC",
-      source_icon: "https://i.bytvi.com/domain_icons/abplive.jpg",
-      source_id: "bbc",
-      source_name: "Abp News",
-      source_priority: 7754,
-      source_url: "http://abplive.com",
-      title:
-        "Summer Special Trains: 3 New Trains to Run From April 21 – Check Dates, Routes, Timings & Stoppages",
-      video_url: null,
+  state = {
+    isArranged: false,
+    extendedText: null,
+    compressedText: null,
+    defaultExtended: null,
+    isLoading: false,
+  };
+
+  async componentDidMount() {
+    const newsData = this.props.location.state.newsData;
+
+    // Fetch subtle default extension
+    const defaultExtended = await getDefaultExtendedContent(newsData);
+
+    // Set it as the base text shown
+    this.setState({
+      defaultExtended: defaultExtended,
+      compressedText: null,
+      isLoading: false,
+    });
+  }
+
+  handleDonate = () => {
+    const options = {
+      key: "rzp_test_cJNh05sqWW2ctq", // Replace with your Razorpay Key ID
+      amount: 5 * 100, // 100 INR in paise
+      currency: "INR",
+      name: "NewsMorph",
+      description: "Support the Creator",
+      image: "/logo.png", // Optional logo
+      handler: function (response) {
+        alert(`Payment ID: ${response.razorpay_payment_id}`);
+      },
+      prefill: {
+        name: "NewsMorph Supporter",
+        email: "donor@example.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#C20202", // Match NewsMorph branding
+      },
+      method: {
+        upi: true,
+        card: false,
+        netbanking: false,
+        wallet: false,
+      },
     };
 
-    const tagsarray = [
-      ...objectrequired.keywords,
-      ...objectrequired.category,
-      ...objectrequired.country,
-    ];
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  handleExtend = async () => {
+    this.setState({ isLoading: true });
+
+    const baseText =
+      this.state.defaultExtended ||
+      this.props.location.state.newsData.description ||
+      this.props.location.state.newsData.title;
+
+    const extended = await getExtendedContent(baseText);
+
+    this.setState({
+      extendedText: extended,
+      isLoading: false,
+      compressedText: null,
+    });
+  };
+
+  handleCompress = async () => {
+    this.setState({ isLoading: true });
+
+    const baseText =
+      this.state.extendedText ||
+      this.state.defaultExtended ||
+      this.props.location.state.newsData.description ||
+      this.props.location.state.newsData.title;
+
+    const compressed = await getCompressedContent(baseText);
+
+    this.setState({
+      compressedText: compressed,
+      isLoading: false,
+      extendedText: null,
+    });
+  };
+
+  render() {
+    const { isArranged, isLoading, extendedText, compressedText } = this.state;
+    const { location } = this.props;
+    const newsData = location?.state?.newsData;
+    if (!newsData) {
+      return <p>No news data available.</p>;
+    }
+    console.log(newsData);
+
+    const objectrequired = newsData;
 
     const dateString = objectrequired.pubDate; // your date
     const timeAgo = formatDistanceToNow(new Date(dateString), {
       addSuffix: true,
     });
 
-    const text = objectrequired.description;
+    let text =
+      compressedText ||
+      extendedText ||
+      this.state.defaultExtended ||
+      objectrequired.description;
 
     const paragraphs = text
       ? text
@@ -53,96 +139,184 @@ class NewsDetailPage extends Component {
           .filter((p) => p)
           .map((p) => p + ".")
       : [];
+
+    const rearrange = () => {
+      this.setState((prev) => ({ isArranged: !prev.isArranged }));
+    };
     return (
-      <div className="allLegendaryNewsdetcontainer">
-        <Navbar requiredclass="navbarshadow" />
-        <div className="NewsDetailAlphacontainer">
-          <div className="NewsDetailMainContainer">
-            <div className="newsHeadline">
-              <p>NEWS HEADLINE ...</p>
-            </div>
-            <div>
-              <hr className="linesnewarheadline" />
-              <hr className="linesnewarheadline" />
-              <hr className="linesnewarheadline" />
-            </div>
-            <h1 className="mainHeadingfornewsdetail">{objectrequired.title}</h1>
-            <div className="newsdetailsformain ">
-              <div className="newsdetsourcedetails justify-between w-full">
-                <div className="sourcecontainerinmain">
-                  <p className="sourec">Source : </p>
+      <>
+        <div className="allLegendaryNewsdetcontainer">
+          <Navbar requiredclass="navbarshadow" />
+          <div className="NewsDetailAlphacontainer">
+            <div className="NewsDetailMainContainer">
+              <div className="newsHeadline">
+                <p>NEWS HEADLINE ...</p>
+              </div>
+              <div>
+                <hr className="linesnewarheadline" />
+                <hr className="linesnewarheadline" />
+                <hr className="linesnewarheadline" />
+              </div>
+              <h1 className="mainHeadingfornewsdetail">
+                {objectrequired.title}
+              </h1>
+              <div className="newsdetailsformain ">
+                <div className="newsdetsourcedetails justify-between w-full">
+                  <div className="sourcecontainerinmain">
+                    <p className="sourec">Source : </p>
+                    <img
+                      src={objectrequired.source_icon}
+                      className="NewsDetailsSourcelogo"
+                    />
+                    <p className="text-lg ml-2">{objectrequired.source_name}</p>
+                  </div>
+                  <div>
+                    <p className="sourec mr-10">{`Posted : ${timeAgo}`}</p>
+                  </div>
+                </div>
+                <div className="imagecontainerinnewsdetpage">
                   <img
-                    src={objectrequired.source_icon}
-                    className="NewsDetailsSourcelogo"
+                    src={objectrequired.image_url}
+                    className="imagedescriptionativeurl"
                   />
-                  <p className="text-lg ml-2">{objectrequired.source_name}</p>
                 </div>
-                <div>
-                  <p className="sourec mr-10">{`Posted : ${timeAgo}`}</p>
+                <div className="AIfeaturesContainer">
+                  <h1 className="gradient-breathing-text">Use AI : </h1>
+                  <div className="container-aifeatures">
+                    <button
+                      className={`buttonforaifeat buttonforaifeat${
+                        extendedText !== null
+                      }`}
+                      onClick={this.handleExtend}
+                    >
+                      {extendedText === null ? "Extend" : "Extended"}
+                    </button>
+                  </div>
+                  <div className="container-aifeatures">
+                    <button
+                      className={`buttonforaifeat buttonforaifeat${isArranged}`}
+                      onClick={() => rearrange()}
+                    >
+                      {isArranged ? "Rearranged" : "Rearrange"}
+                    </button>
+                  </div>
+                  <div className="container-aifeatures">
+                    <button
+                      className={`buttonforaifeat buttonforaifeat${
+                        compressedText !== null
+                      }`}
+                      onClick={this.handleCompress}
+                    >
+                      {compressedText === null ? "Compress" : "Compressed"}
+                    </button>
+                  </div>
+                  <InputWord />
                 </div>
-              </div>
-              <div className="imagecontainerinnewsdetpage">
-                <img
-                  src={objectrequired.image_url}
-                  className="imagedescriptionativeurl"
-                />
-              </div>
-              <div className="AIfeaturesContainer">
-                <h1 className="gradient-breathing-text">
-                  Tune News with AI :{" "}
-                </h1>
-                <div className="container-aifeatures">
-                  <button className="buttonforaifeat">Extend</button>
+                <div className="bordercont">
+                  <hr className="borderlineafterai" />
                 </div>
-                <div className="container-aifeatures">
-                  <button className="buttonforaifeat">Rearrange</button>
+                {isLoading || this.state.defaultExtended === null ? (
+                  <PyramidLoader />
+                ) : (
+                  <div className="mainparafornewsdetailcontainer">
+                    {isArranged ? (
+                      <ul className="list-disc pl-5">
+                        {paragraphs.map((para, index) => (
+                          <li
+                            key={index}
+                            style={{ marginBottom: "10px" }}
+                            className="parafornewsdet"
+                          >
+                            {para}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ul className="list-disc pl-5">
+                        <p
+                          style={{ marginBottom: "10px" }}
+                          className="parafornewsdet"
+                        >
+                          {text}
+                        </p>
+                      </ul>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <footer className="bg-black text-white py-10 px-6 mt-12 w-screen z-50">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {/* Brand Section */}
+                  <div>
+                    <h2 className="text-2xl font-bold text-red-600">
+                      NewsMorph
+                    </h2>
+                    <p className="mt-2 text-gray-400">
+                      Morph your news. Read it your way.
+                    </p>
+                  </div>
+
+                  {/* Useful Links */}
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
+                    <ul className="space-y-1 text-gray-400">
+                      <li>
+                        <a href="/" className="hover:text-white">
+                          Home
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/about" className="hover:text-white">
+                          About
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/privacy" className="hover:text-white">
+                          Privacy Policy
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/contact" className="hover:text-white">
+                          Contact
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Creator Support */}
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">
+                      Support the Creator
+                    </h3>
+                    <p className="text-gray-400 mb-2">
+                      Like what we built? Show some love 💖
+                    </p>
+                    <button
+                      className="bg-red-600 hover:bg-red-800 transition-colors px-4 py-2 rounded-md font-medium cursor-pointer"
+                      onClick={this.handleDonate}
+                    >
+                      Donate via UPI
+                    </button>
+                  </div>
                 </div>
-                <div className="container-aifeatures">
-                  <button className="buttonforaifeat">Compress</button>
+
+                {/* Bottom Text */}
+                <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm">
+                  © 2025 NewsMorph. All rights reserved.
                 </div>
-                <InputWord />
-              </div>
-              <div className="bordercont">
-                <hr className="borderlineafterai" />
-              </div>
-              <div className="mainparafornewsdetailcontainer">
-                {paragraphs.map((para, index) => (
-                  <p
-                    key={index}
-                    style={{ marginBottom: "10px" }}
-                    className="parafornewsdet"
-                  >
-                    {para}
-                  </p>
-                ))}
-                {paragraphs.map((para, index) => (
-                  <p
-                    key={index}
-                    style={{ marginBottom: "10px" }}
-                    className="parafornewsdet"
-                  >
-                    {para}
-                  </p>
-                ))}
-                {paragraphs.map((para, index) => (
-                  <p
-                    key={index}
-                    style={{ marginBottom: "10px" }}
-                    className="parafornewsdet"
-                  >
-                    {para}
-                  </p>
-                ))}
-              </div>
+              </footer>
             </div>
+            <NewsDetailSecondaryContainer
+              source_name={objectrequired.source_id}
+            />
           </div>
-          <NewsDetailSecondaryContainer
-            source_name={objectrequired.source_id}
-          />
         </div>
-      </div>
+      </>
     );
   }
 }
 
-export default NewsDetailPage;
+export default withRouter(NewsDetailPage);
+
+//AIzaSyBHmkXlD4a5vftbfSm-FbvxGEZYFkJsJmI
