@@ -93,3 +93,24 @@
     
     width: 50%;
 }
+
+@media screen and (max-width: 800px) {
+  .wordsinputcontainer{
+    width: 250px;
+    height: 50px;
+  }
+  .mainshadowonfocus{
+    width: 250px;
+    height: 53px;
+  }
+}
+@media screen and (max-width: 630px) {
+  .wordsinputcontainer{
+    width:300px;
+    height: 50px;
+  }
+  .mainshadowonfocus{
+    width: 300px;
+    height: 53px;
+  }
+}

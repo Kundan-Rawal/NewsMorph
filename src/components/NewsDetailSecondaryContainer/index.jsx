@@ -92,36 +92,62 @@ class NewsDetailSecondaryContainer extends Component {
 
           {currentNews ? (
             <div className="news-card">
-              {currentNews.image_url && (
-                <img
-                  src={currentNews.image_url}
-                  alt={currentNews.title}
-                  className="news-img"
-                />
-              )}
-              <h2 className="titleofrelatednews">{currentNews.title}</h2>
-              <p className="paragraphforrelatednews">
-                {currentNews.description}
-              </p>
+              <div>
+                <button
+                  onClick={this.handlePrev}
+                  disabled={currentIndex === 0}
+                  className="arraowbuttonlg"
+                >
+                  <GrPrevious size={20} color="#fff" />
+                </button>
+              </div>
+              <div className="news-card-after-cont">
+                {currentNews.image_url && (
+                  <img
+                    src={currentNews.image_url}
+                    alt={currentNews.title}
+                    className="news-img"
+                  />
+                )}
+                <div className="morefromtextdetailsfornews">
+                  <h2 className="titleofrelatednews">{currentNews.title}</h2>
+                  <p className="paragraphforrelatednews">
+                    {currentNews.description}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <button
+                  onClick={this.handleNext}
+                  disabled={currentIndex === newsListnew.length - 1}
+                  className="arraowbuttonlg"
+                >
+                  <GrNext size={20} color="#fff" />
+                </button>
+              </div>
             </div>
           ) : (
             <p>Loading...</p>
           )}
 
-          {/* Navigation Buttons */}
+          <button className="bg-red-600 hover:bg-red-800 transition-colors px-4 py-2 rounded-md font-medium cursor-pointer text-white">
+            Read More
+          </button>
           <div className="carousel-controls">
             <button
               onClick={this.handlePrev}
               disabled={currentIndex === 0}
-              className="arraowbutton"
+              className="arraowbuttonsm"
             >
               <GrPrevious size={20} color="#fff" />
             </button>
-            <p className="postindicator">{`Post : ${currentIndex + 1}/10`}</p>
+            <p className="postindicator mb-5">{`Post : ${
+              currentIndex + 1
+            }/10`}</p>
             <button
               onClick={this.handleNext}
               disabled={currentIndex === newsListnew.length - 1}
-              className="arraowbutton"
+              className="arraowbuttonsm"
             >
               <GrNext size={20} color="#fff" />
             </button>

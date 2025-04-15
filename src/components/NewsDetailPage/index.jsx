@@ -152,7 +152,7 @@ class NewsDetailPage extends Component {
               <div className="newsHeadline">
                 <p>NEWS HEADLINE ...</p>
               </div>
-              <div>
+              <div className="ml-6 w-11/12">
                 <hr className="linesnewarheadline" />
                 <hr className="linesnewarheadline" />
                 <hr className="linesnewarheadline" />
@@ -161,17 +161,17 @@ class NewsDetailPage extends Component {
                 {objectrequired.title}
               </h1>
               <div className="newsdetailsformain ">
-                <div className="newsdetsourcedetails justify-between w-full">
+                <div className="newsdetsourcedetails justify-between w-full pl-5 pr-5">
                   <div className="sourcecontainerinmain">
                     <p className="sourec">Source : </p>
                     <img
                       src={objectrequired.source_icon}
                       className="NewsDetailsSourcelogo"
                     />
-                    <p className="text-lg ml-2">{objectrequired.source_name}</p>
+                    <p className="text-sm ml-2">{objectrequired.source_name}</p>
                   </div>
                   <div>
-                    <p className="sourec mr-10">{`Posted : ${timeAgo}`}</p>
+                    <p className="sourec">{`Posted : ${timeAgo}`}</p>
                   </div>
                 </div>
                 <div className="imagecontainerinnewsdetpage">
@@ -181,36 +181,40 @@ class NewsDetailPage extends Component {
                   />
                 </div>
                 <div className="AIfeaturesContainer">
-                  <h1 className="gradient-breathing-text">Use AI : </h1>
-                  <div className="container-aifeatures">
-                    <button
-                      className={`buttonforaifeat buttonforaifeat${
-                        extendedText !== null
-                      }`}
-                      onClick={this.handleExtend}
-                    >
-                      {extendedText === null ? "Extend" : "Extended"}
-                    </button>
+                  <div>
+                    <h1 className="gradient-breathing-text">Use AI : </h1>
                   </div>
-                  <div className="container-aifeatures">
-                    <button
-                      className={`buttonforaifeat buttonforaifeat${isArranged}`}
-                      onClick={() => rearrange()}
-                    >
-                      {isArranged ? "Rearranged" : "Rearrange"}
-                    </button>
+                  <div className="buttonsofaimaincontainer">
+                    <div className="container-aifeatures">
+                      <button
+                        className={`buttonforaifeat buttonforaifeat${
+                          extendedText !== null
+                        }`}
+                        onClick={this.handleExtend}
+                      >
+                        {extendedText === null ? "Extend" : "Extended"}
+                      </button>
+                    </div>
+                    <div className="container-aifeatures">
+                      <button
+                        className={`buttonforaifeat buttonforaifeat${isArranged}`}
+                        onClick={() => rearrange()}
+                      >
+                        {isArranged ? "Rearranged" : "Rearrange"}
+                      </button>
+                    </div>
+                    <div className="container-aifeatures">
+                      <button
+                        className={`buttonforaifeat buttonforaifeat${
+                          compressedText !== null
+                        }`}
+                        onClick={this.handleCompress}
+                      >
+                        {compressedText === null ? "Compress" : "Compressed"}
+                      </button>
+                    </div>
+                    <InputWord />
                   </div>
-                  <div className="container-aifeatures">
-                    <button
-                      className={`buttonforaifeat buttonforaifeat${
-                        compressedText !== null
-                      }`}
-                      onClick={this.handleCompress}
-                    >
-                      {compressedText === null ? "Compress" : "Compressed"}
-                    </button>
-                  </div>
-                  <InputWord />
                 </div>
                 <div className="bordercont">
                   <hr className="borderlineafterai" />
@@ -220,7 +224,7 @@ class NewsDetailPage extends Component {
                 ) : (
                   <div className="mainparafornewsdetailcontainer">
                     {isArranged ? (
-                      <ul className="list-disc pl-5">
+                      <ul className="list-disc flex flex-col items-center">
                         {paragraphs.map((para, index) => (
                           <li
                             key={index}
@@ -232,7 +236,7 @@ class NewsDetailPage extends Component {
                         ))}
                       </ul>
                     ) : (
-                      <ul className="list-disc pl-5">
+                      <ul className="list-disc pl-5  flex flex-col items-center p-0">
                         <p
                           style={{ marginBottom: "10px" }}
                           className="parafornewsdet"
@@ -244,21 +248,23 @@ class NewsDetailPage extends Component {
                   </div>
                 )}
               </div>
-
-              <footer className="bg-black text-white py-10 px-6 mt-12 w-screen z-50">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+              <NewsDetailSecondaryContainer
+                source_name={objectrequired.source_id}
+              />
+              <footer className="bg-black text-white mt-12 pb-5 w-screen z-50 flex flex-col justify-between">
+                <div className="w-screen mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                   {/* Brand Section */}
-                  <div>
+                  <div className="flex flex-col items-center">
                     <h2 className="text-2xl font-bold text-red-600">
                       NewsMorph
                     </h2>
-                    <p className="mt-2 text-gray-400">
+                    <p className="mt-2 text-gray-400 text-center">
                       Morph your news. Read it your way.
                     </p>
                   </div>
 
                   {/* Useful Links */}
-                  <div>
+                  <div className="flex flex-col items-center">
                     <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
                     <ul className="space-y-1 text-gray-400">
                       <li>
@@ -285,12 +291,12 @@ class NewsDetailPage extends Component {
                   </div>
 
                   {/* Creator Support */}
-                  <div>
+                  <div className="flex flex-col items-center">
                     <h3 className="text-xl font-semibold mb-2">
                       Support the Creator
                     </h3>
-                    <p className="text-gray-400 mb-2">
-                      Like what we built? Show some love 💖
+                    <p className="text-gray-400 mb-2 text-center">
+                      Liked what we built ? Show some love 💖
                     </p>
                     <button
                       className="bg-red-600 hover:bg-red-800 transition-colors px-4 py-2 rounded-md font-medium cursor-pointer"
@@ -302,14 +308,11 @@ class NewsDetailPage extends Component {
                 </div>
 
                 {/* Bottom Text */}
-                <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm">
+                <div className="mt-5 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm">
                   © 2025 NewsMorph. All rights reserved.
                 </div>
               </footer>
             </div>
-            <NewsDetailSecondaryContainer
-              source_name={objectrequired.source_id}
-            />
           </div>
         </div>
       </>

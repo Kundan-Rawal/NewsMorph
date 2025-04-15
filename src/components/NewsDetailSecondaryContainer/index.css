@@ -7,8 +7,8 @@
   }
 .NewsDetailSecondaryContainer{
     background-color: rgb(0, 0, 0);
-    width: 25vw;
-    height: auto;
+    width: 100vw;
+    height:auto;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -18,11 +18,14 @@
 }
 .MoreFromSourceContainer{
     background-color: #1a1a1a;
-    width: 18vw;
-    height: 300px;
-    position: absolute;
-    top:13vh;
+    width: 70%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 10px;
+    margin-top: 100px;
+
 
 }
 .headingformoresourcecont{
@@ -31,7 +34,7 @@
     text-align: center;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
     padding: 5px 0px;
 }
@@ -47,14 +50,26 @@
     padding: 1rem;
     border-radius: 12px;
     background-color: #1a1a1a;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
   .news-card img {
-    width: 100%;
+    width:500px;
+    height: 300px;
     border-radius: 8px;
+    margin-left: 20px;
   }
 
 
-
+.news-card-after-cont{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
   .news-card {
     
     padding: 1rem;
@@ -74,7 +89,7 @@
     gap: 1rem;
   }
   .titleofrelatednews{
-    font-size: 15px;
+    font-size: 30px;
     color: #C20202;
     font-weight: 600;
     display: -webkit-box;
@@ -82,9 +97,10 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 60%;
   }
   .paragraphforrelatednews{
-    font-size: 12px;
+    font-size: 20px;
     color: #ffffff;
     font-weight: 500;
     display: -webkit-box;
@@ -93,16 +109,86 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 15px;
+  width: 70%;
   }
-  .arraowbutton{
+  .arraowbuttonlg{
     background-color: #FF053F;
     padding: 5px;
     border-radius: 10px;
     margin-bottom: 10px;
     cursor: pointer;
   }
+  .arraowbuttonsm{
+    background-color: #FF053F;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: none;
+  }
   .postindicator{
     color:var(--accent);
     font-weight: 500;
     font-size: 20px;
+  }
+  .morefromtextdetailsfornews{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 1050px) {
+    .news-card img{
+      width: 250px;
+      height: 200px;
+    }
+    .MoreFromSourceContainer{
+      width: 90%;
+    }
+    .titleofrelatednews{
+      width: 100%;
+    }
+    .paragraphforrelatednews{
+      width: 90%;
+    }
+    .headingformoresourcecont{
+      padding: 0px 0px;
+    }
+  }
+
+  @media screen and (max-width: 630px) {
+    .news-card{
+      flex-direction: column;
+      padding: 3px;
+      padding-top: 10px;
+    }
+    .arraowbuttonlg{
+      display: none;
+    }
+    .arraowbuttonsm{
+      display: block;
+    }
+    .news-card-after-cont{
+      flex-direction: column;
+    }
+    .news-card img{
+      margin: 0px;
+      width: 90%;
+      height: 200px;
+    }
+    .carousel-controls{
+      justify-content: space-around;
+      width: 100%;
+      padding-bottom: 15px;
+    }
+    .morefromtextdetailsfornews{
+      padding: 10px;
+    }
+    .titleofrelatednews{
+      font-size: 25px;
+    }
+    .paragraphforrelatednews{
+      font-size: 16px;
+    }
   }

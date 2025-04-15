@@ -8,26 +8,27 @@
 
 .NewsDetailAlphacontainer{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     min-height: 90vh;
     background-color: black;
     justify-content: center;
-    align-items: center;
+   
 }
 .NewsDetailMainContainer{
     background-color: rgb(9, 9, 9);
-    width: 75vw;
+    width: 100vw;
     min-height: 90vh;
     
-   
-
+    
 }
 .allLegendaryNewsdetcontainer{
     width: 100vw;
     height:100vh ;
     background-color: #000000;
-    overflow-x: scroll;
+    overflow-y: scroll;
     scrollbar-width: none;
+   
+    
 }
 .newsHeadline{
     background-color: var(--primary-red);
@@ -38,21 +39,21 @@
     color: #ffffff;
     width: 200px;
     transform: skew(-25deg);
-    margin-left: 20px;
+    margin-left: 30px;
     margin-top: 20px;
     border-radius: 5px;
 
 }
 .linesnewarheadline{
     border: 1px solid var(--accent);
-    width: 75vw;
+    width: 90vw;
     margin-bottom: 5px;
 }
 
 .mainHeadingfornewsdetail{
     color: #ffffff;
     font-size: 30px;
-    padding: 10px;
+    padding: 20px;
     font-weight: 700;
 }
 .NewsDetailsSourcelogo{
@@ -74,7 +75,7 @@
     font-weight: 500;
 }
 .newsdetailsformain{
-    margin-left: 10px;
+   
 }
 .sourcecontainerinmain{
     display: flex;
@@ -82,10 +83,10 @@
     align-items: center;
 }
 .imagedescriptionativeurl{
-    width: 70%;
-    height: 55vh;
+    width: 50%;
+    
     border-radius: 10px;
-    filter: contrast(1.3) saturate(1.2) ;
+    
 
 }
 .imagecontainerinnewsdetpage{
@@ -105,7 +106,7 @@
 }
 .parafornewsdet{
     color: #ffffff;
-    width: 90%;
+    width: 70%;
     line-height: 1.2;
     font-size: 20px;
     font-weight: 400;
@@ -252,6 +253,14 @@
     }
   }
 
+  .buttonsofaimaincontainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+
+  }
+
 
   .allMythicNewsDetContainer{
     overflow-y: scroll;
@@ -271,4 +280,65 @@
   color: #ffffff;
   font-size: 20px;
   font-weight: 500;
+}
+@media screen and (max-width: 800px) {
+  .imagedescriptionativeurl{
+    width: 80%;
+  }
+  .buttonforaifeat{
+    font-size: 0.9em;
+    padding: 0.4em 0.6em;
+  }
+  .container-aifeatures{
+
+  }
+  .parafornewsdet{
+    width: 80%;
+    margin: 0px;
+  }
+  .padrem{
+    padding: 0px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+    .mainHeadingfornewsdetail{
+      font-size: 25px;    }
+    .sourec{
+      font-size: 15px;
+    }
+    .newsdetsourcedetails{
+
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .imagedescriptionativeurl{
+      width: 90%;
+    }
+    .container-aifeatures{
+      padding: 3px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+    .AIfeaturesContainer{
+      flex-direction: column;
+    }
+    .buttonsofaimaincontainer{
+      display: flex;
+      justify-content: space-around;
+    }
+    .gradient-breathing-text{
+      display: none;
+    }
+    .parafornewsdet{
+      font-size: 18px;
+    }
+    .AIfeaturesContainer{
+      padding: 0px;
+      padding-bottom: 10px;
+    }
 }
