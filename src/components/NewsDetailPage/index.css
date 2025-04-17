@@ -299,6 +299,7 @@
   .padrem{
     padding: 0px;
   }
+
 }
 
 @media screen and (max-width: 630px) {
@@ -341,4 +342,6 @@
       padding: 0px;
       padding-bottom: 10px;
     }
+    .main
+
 }

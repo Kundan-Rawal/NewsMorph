@@ -236,7 +236,7 @@ class NewsDetailPage extends Component {
                         ))}
                       </ul>
                     ) : (
-                      <ul className="list-disc pl-5  flex flex-col items-center p-0">
+                      <ul className="list-disc flex flex-col items-center p-0">
                         <p
                           style={{ marginBottom: "10px" }}
                           className="parafornewsdet"

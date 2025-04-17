@@ -8,6 +8,7 @@ import StateContext from "./context/StateContext";
 import { auth, provider, signInWithPopup } from "./firebase";
 import "./App.css";
 import NewsDetailPage from "./components/NewsDetailPage";
+import Features from "./components/Features";
 
 class App extends Component {
   state = { dropdown: false, isLoggedIn: false, user: null };
@@ -49,6 +50,7 @@ class App extends Component {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
+          <Route path="/features" element={<Features />} />
         </Routes>
       </StateContext.Provider>
     );

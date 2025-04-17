@@ -112,5 +112,6 @@
   .mainshadowonfocus{
     width: 300px;
     height: 53px;
+    margin-left: 0px;
   }
 }
