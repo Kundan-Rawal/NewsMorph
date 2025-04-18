@@ -31,17 +31,23 @@ class NewsDetailPage extends Component {
   };
 
   async componentDidMount() {
-    const newsData = this.props.location.state?.newsData;
+    let newsData = this.props.location.state?.newsData;
+
+    // Try to load from localStorage if state is missing (like on page reload)
+    if (!newsData) {
+      const stored = localStorage.getItem("selectedNews");
+      if (stored) {
+        newsData = JSON.parse(stored);
+      }
+    }
 
     if (!newsData) {
-      this.setState({
-        defaultExtended:
-          "Oops! Unable to load the news. Please go back and try again.",
-      });
-      return;
+      return this.setState({ defaultExtended: "News not found." });
     }
 
     const defaultExtended = await getDefaultExtendedContent(newsData);
+
+    localStorage.removeItem("selectedNews");
 
     this.setState({
       defaultExtended: defaultExtended,

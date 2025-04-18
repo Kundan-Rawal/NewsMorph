@@ -336,14 +336,18 @@ class Home extends Component {
                             </div>
                             <button
                               className="readmorebutton"
-                              onClick={() =>
+                              onClick={() => {
+                                localStorage.setItem(
+                                  "selectedNews",
+                                  JSON.stringify(item)
+                                ); // Save to localStorage
                                 this.props.navigate(
                                   `/news/${item.article_id}`,
                                   {
                                     state: { newsData: item },
                                   }
-                                )
-                              }
+                                );
+                              }}
                             >
                               Read more
                             </button>
