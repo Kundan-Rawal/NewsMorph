@@ -153,8 +153,13 @@ class NewsDetailPage extends Component {
   };
 
   render() {
-    const { isLoading, extendedText, compressedText, defaultExtended } =
-      this.state;
+    const {
+      isLoading,
+      extendedText,
+      compressedText,
+      defaultExtended,
+      isArranged,
+    } = this.state;
 
     // Check if newsData exists (prevent crashes)
     let newsData = this.props.location.state?.newsData;
