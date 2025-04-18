@@ -31,27 +31,36 @@ class NewsDetailPage extends Component {
   };
 
   async componentDidMount() {
+    // 1. Try location.state first (if navigated from within app)
     let newsData = this.props.location.state?.newsData;
 
-    // Try to load from localStorage if state is missing (like on page reload)
+    // 2. Fallback to localStorage (if page refreshed/directly accessed)
     if (!newsData) {
       const stored = localStorage.getItem("selectedNews");
-      if (stored) {
-        newsData = JSON.parse(stored);
-      }
+      newsData = stored ? JSON.parse(stored) : null;
     }
 
+    // 3. If still no data, show error (no 404)
     if (!newsData) {
-      return this.setState({ defaultExtended: "News not found." });
+      this.setState({
+        defaultExtended:
+          "News not found. Please go back and select an article.",
+        isLoading: false,
+      });
+      return;
     }
 
-    const defaultExtended = await getDefaultExtendedContent(newsData);
-
-    this.setState({
-      defaultExtended: defaultExtended,
-      compressedText: null,
-      isLoading: false,
-    });
+    // Load content
+    try {
+      this.setState({ isLoading: true });
+      const defaultExtended = await getDefaultExtendedContent(newsData);
+      this.setState({ defaultExtended, isLoading: false });
+    } catch (error) {
+      this.setState({
+        defaultExtended: "Error loading content. Try again later.",
+        isLoading: false,
+      });
+    }
   }
   handleDonate = () => {
     const options = {
@@ -144,16 +153,26 @@ class NewsDetailPage extends Component {
   };
 
   render() {
-    const { isArranged, isLoading, extendedText, compressedText } = this.state;
-    const { location } = this.props;
-    let newsData = location?.state?.newsData;
+    const { isLoading, extendedText, compressedText, defaultExtended } =
+      this.state;
+
+    // Check if newsData exists (prevent crashes)
+    let newsData = this.props.location.state?.newsData;
     if (!newsData) {
       const stored = localStorage.getItem("selectedNews");
-      if (stored) {
-        newsData = JSON.parse(stored);
-      }
+      newsData = stored ? JSON.parse(stored) : null;
     }
 
+    // Show error if no data (instead of 404)
+    if (!newsData) {
+      return (
+        <div className="error-fallback">
+          <h2>Article Not Found</h2>
+          <p>Please go back and select a valid news article.</p>
+          <a href="/">Return to Home</a>
+        </div>
+      );
+    }
     const objectrequired = newsData;
 
     const dateString = objectrequired.pubDate;
