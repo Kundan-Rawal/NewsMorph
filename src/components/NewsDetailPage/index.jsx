@@ -47,8 +47,6 @@ class NewsDetailPage extends Component {
 
     const defaultExtended = await getDefaultExtendedContent(newsData);
 
-    localStorage.removeItem("selectedNews");
-
     this.setState({
       defaultExtended: defaultExtended,
       compressedText: null,
