@@ -122,15 +122,20 @@ class NewsDetailPage extends Component {
   render() {
     const { isArranged, isLoading, extendedText, compressedText } = this.state;
     const { location } = this.props;
-    const newsData = location?.state?.newsData;
+    let newsData = location?.state?.newsData;
     if (!newsData) {
-      return <p>No news data available.</p>;
+      const stored = localStorage.getItem("selectedNews");
+      if (stored) {
+        newsData = JSON.parse(stored);
+      }
     }
-    console.log(newsData);
 
     const objectrequired = newsData;
 
-    const dateString = objectrequired.pubDate; // your date
+    const dateString = objectrequired.pubDate;
+    if (!dateString) {
+      return <p>Invalid date format</p>;
+    }
     const timeAgo = formatDistanceToNow(new Date(dateString), {
       addSuffix: true,
     });
