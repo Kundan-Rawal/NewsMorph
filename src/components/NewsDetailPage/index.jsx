@@ -31,19 +31,24 @@ class NewsDetailPage extends Component {
   };
 
   async componentDidMount() {
-    const newsData = this.props.location.state.newsData;
+    const newsData = this.props.location.state?.newsData;
 
-    // Fetch subtle default extension
+    if (!newsData) {
+      this.setState({
+        defaultExtended:
+          "Oops! Unable to load the news. Please go back and try again.",
+      });
+      return;
+    }
+
     const defaultExtended = await getDefaultExtendedContent(newsData);
 
-    // Set it as the base text shown
     this.setState({
       defaultExtended: defaultExtended,
       compressedText: null,
       isLoading: false,
     });
   }
-
   handleDonate = () => {
     const options = {
       key: "rzp_test_cJNh05sqWW2ctq", // Replace with your Razorpay Key ID
