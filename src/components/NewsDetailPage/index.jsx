@@ -84,39 +84,63 @@ class NewsDetailPage extends Component {
     rzp1.open();
   };
 
+  getNewsDataFromLocation = () => {
+    const { location } = this.props;
+    if (location?.state?.newsData) {
+      return location.state.newsData;
+    }
+
+    // Fallback to localStorage
+    const stored = localStorage.getItem("selectedNews");
+    return stored ? JSON.parse(stored) : null;
+  };
+
   handleExtend = async () => {
     this.setState({ isLoading: true });
 
-    const baseText =
-      this.state.defaultExtended ||
-      this.props.location.state.newsData.description ||
-      this.props.location.state.newsData.title;
+    let baseText = this.state.defaultExtended;
 
-    const extended = await getExtendedContent(baseText);
+    // Fallback to location state or localStorage if location state is missing
+    if (!baseText) {
+      const newsData = this.getNewsDataFromLocation();
+      baseText = newsData?.description || newsData?.title;
+    }
 
-    this.setState({
-      extendedText: extended,
-      isLoading: false,
-      compressedText: null,
-    });
+    if (baseText) {
+      const extended = await getExtendedContent(baseText);
+
+      this.setState({
+        extendedText: extended,
+        isLoading: false,
+        compressedText: null,
+      });
+    } else {
+      this.setState({ isLoading: false });
+    }
   };
 
   handleCompress = async () => {
     this.setState({ isLoading: true });
 
-    const baseText =
-      this.state.extendedText ||
-      this.state.defaultExtended ||
-      this.props.location.state.newsData.description ||
-      this.props.location.state.newsData.title;
+    let baseText = this.state.extendedText || this.state.defaultExtended;
 
-    const compressed = await getCompressedContent(baseText);
+    // Fallback to location state or localStorage if location state is missing
+    if (!baseText) {
+      const newsData = this.getNewsDataFromLocation();
+      baseText = newsData?.description || newsData?.title;
+    }
 
-    this.setState({
-      compressedText: compressed,
-      isLoading: false,
-      extendedText: null,
-    });
+    if (baseText) {
+      const compressed = await getCompressedContent(baseText);
+
+      this.setState({
+        compressedText: compressed,
+        isLoading: false,
+        extendedText: null,
+      });
+    } else {
+      this.setState({ isLoading: false });
+    }
   };
 
   render() {
