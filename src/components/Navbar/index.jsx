@@ -68,6 +68,8 @@ const Navbar = (props) => {
         );
       }}
     </StateContext.Consumer>
+    
   );
 };
+//fake comment for azure deployment
 export default Navbar;
