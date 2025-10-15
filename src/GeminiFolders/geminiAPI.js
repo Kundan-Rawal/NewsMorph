@@ -6,7 +6,7 @@ const genAI = new GoogleGenerativeAI("AIzaSyC-x0H84I6tY4CC-G5QlY9ODQ3WtqxQRt4");
 //AIzaSyBJWHZL6EAJytt8ZkESN0BPHe8skT04T9Q
 
 // Load Gemini 2.0 Flash Lite model
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
 
 export const getExtendedContent = async (originalText) => {
   const prompt = `Extend this news content in a natural way,with Avoid any placeholders like [Insert details] and do not leave any incomplete sentences. Only include information that can be reasonably inferred or summarized. and keeping the essence intact with searching more sources from web in 700 words:\n\n"${originalText}"`;
