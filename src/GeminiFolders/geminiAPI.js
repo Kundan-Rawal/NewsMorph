@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Load API Key from .env or directly (not safe for frontend, use proxy/backend if possible)
-const genAI = new GoogleGenerativeAI("AIzaSyBHmkXlD4a5vftbfSm-FbvxGEZYFkJsJmI");
+const genAI = new GoogleGenerativeAI("AIzaSyC-x0H84I6tY4CC-G5QlY9ODQ3WtqxQRt4");
 //AIzaSyC-tKehddSlfcoKfVQS-LeWpa9iegXUXJA
 //AIzaSyBJWHZL6EAJytt8ZkESN0BPHe8skT04T9Q
 
