@@ -57,7 +57,7 @@ class NewsDetailPage extends Component {
       this.setState({ defaultExtended, isLoading: false });
     } catch (error) {
       this.setState({
-        defaultExtended: "Error loading content. Try again later.",
+        defaultExtended: `Error loading content. Try again later.  ${error.message}`,
         isLoading: false,
       });
     }

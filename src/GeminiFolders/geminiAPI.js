@@ -26,6 +26,6 @@ export const getDefaultExtendedContent = async (newsData) => {
     const baseText = newsData.description || newsData.title;
     const prompt = `Improve the readability and fluency of this news content without changing the core facts by getting the latest resources from the web also Avoid any placeholders like [Insert details] and do not leave any incomplete sentences in 400 words please dont use the placeholders in [] and delete the placeholders with[]:\n\n"${baseText}"`;
     const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const response = newsData.description
     return response.text();
   };

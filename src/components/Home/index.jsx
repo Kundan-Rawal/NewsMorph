@@ -102,63 +102,59 @@ class Home extends Component {
       newsList,
       nextPage,
       selectedSource,
-      api,
     } = this.state;
 
-    const API_KEY_ARRAY = [
-      "pub_792024dcd61aeea2e22f18e8f9b363af95e53",
-      "pub_79207b11d89a30ab35e7123c3a4a54f5b9e32",
-      "pub_7893874894b7380c7d7e3720acfbd1a413138",
-    ];
-    const API_KEY = "pub_79207b11d89a30ab35e7123c3a4a54f5b9e32";
-    const baseURL = "https://newsdata.io/api/1/news";
-
-    const usingSource = !!selectedSource;
-
-    const categoryParam =
-      !usingSource && activecat !== "all" ? `&category=${activecat}` : "";
-    const countryParam = !usingSource ? `&country=${country}` : "";
-    const sourceParam = usingSource ? `&domain=${selectedSource}` : "";
-    const searchParam = SearchItem
-      ? `&q=${encodeURIComponent(SearchItem)}`
-      : "";
-    const pageParam = nextPage ? `&page=${nextPage}` : "";
-
-    const URL = `${baseURL}?apikey=${API_KEY_ARRAY[api]}&language=en${countryParam}${categoryParam}${searchParam}${pageParam}${sourceParam}`;
+    // 🛑 POINT TO YOUR LOCAL BACKEND
+    const BACKEND_URL = "https://newsmorphbackend.onrender.com/news";
 
     this.setState({ isLoading: true });
 
     try {
-      console.log("📡 API Call:", URL);
+      console.log("📡 Connecting to Backend...");
 
-      const response = await fetch(URL);
+      // 1. Send the state parameters as a JSON payload
+      const response = await fetch(BACKEND_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          activecat,
+          SearchItem,
+          country,
+          nextPage,
+          selectedSource,
+        }),
+      });
+
+      // 2. Handle Backend Errors (e.g., 500 if keys fail, 429 if quota full)
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP Error: ${response.status}`);
+      }
+
       const data = await response.json();
 
+      // 3. Process Success
       if (data.status === "error") {
-        console.warn("❌ API Error:", data.message);
-        if (api < 3) {
-          this.setState((prev) => ({ isLoading: false, api: prev.api + 1 }));
-        } else if (api === 3) {
-          this.setState({ isLoading: false, api: 0 });
-        } else {
-          this.setState({ isLoading: false });
-        }
+        console.warn("❌ Backend API Error:", data.message);
+        this.setState({ isLoading: false });
         return;
       }
 
       if (Array.isArray(data.results)) {
-        console.log(data.results);
+        console.log(`✅ Received ${data.results.length} articles`);
         this.setState({
           newsList: [...newsList, ...data.results],
           nextPage: data.nextPage || null,
           isLoading: false,
         });
       } else {
-        console.warn("⚠️ Unexpected or empty response.");
+        console.warn("⚠️ Unexpected response structure from backend.");
         this.setState({ isLoading: false, nextPage: null });
       }
     } catch (err) {
-      console.error("🔥 Fetch error:", err);
+      console.error("🔥 Frontend Fetch Error:", err.message);
       this.setState({ isLoading: false });
     }
   };
