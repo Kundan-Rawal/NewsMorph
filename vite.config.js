@@ -30,7 +30,7 @@ export default defineConfig({
     },
   }),],
   build: {
-    outDir: 'build'
+    outDir: 'dist'
   },
   // This is key 👇
   server: {
